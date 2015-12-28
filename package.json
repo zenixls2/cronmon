@@ -1,0 +1,18 @@
+{
+  "name": "cronmon",
+  "version": "1.0.0",
+  "description": "cron job monitoring tool ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "nodemon": "^1.8.1",
+    "redis": "^2.4.2",
+    "sendmail": "^0.2.1"
+  }
+}
