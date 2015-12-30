@@ -28,10 +28,10 @@ app.get(/.*\/check/, function(req, res) {
     });
     if (req.query.code != 0) {
         sendmail({
-            from: 'no-reply@huanghanshengdeMac-mini',
+            from: 'no-reply@cronmon.appier.org',
             to: 'zenixhuang@appier.com',
-            subject: "test",
-            content: "test"
+            subject: "Alert: job fail",
+            content: id + ': exit('+req.query.code+')'
         }, function(err, reply) {
             console.log(err && err.stack);
             console.log(reply);
