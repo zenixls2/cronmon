@@ -2,8 +2,11 @@ Installation
 ------------
 - prepare
 ```
-    sudo apt-get install nodejs redis nginx
-    npm install -g pm2
+    sudo apt-add-repository ppa:chris-lea/node.js
+    sudo apt-get update
+    sudo apt-get install nodejs redis-server nginx
+    sudo npm install -g pm2
+    sudo cp redis.conf /etc/init/
     npm install
     # set up reverse proxy for nginx
 ```
