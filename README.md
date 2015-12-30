@@ -2,14 +2,16 @@ Installation
 ------------
 - prepare
 ```
-    sudo apt-get install nodejs redis
-    npm install -g nodemon
+    sudo apt-get install nodejs redis nginx
+    npm install -g pm2
     npm install
+    # set up reverse proxy for nginx
 ```
 - to run:
 ```
     sudo service redis start
-    nodemon app.js
+    pm2 startup ubuntu
+    pm2 start app.js
 ```
 - endpoints:
 ```
