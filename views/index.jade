@@ -41,7 +41,7 @@ html
             |           row.innerHTML = '<td>'+key+'</td><td>'+
             |               value['status'] + '</td><td>' +
             |               value['date'] + '</td><td>' +
-            |               value['duration'].toHHMMSS() + '</td>';
+            |               ((value['duration']==null)?null:value['duration'].toHHMMSS()) + '</td>';
             |       });
             |       $('#list').tablesorter({
             |           theme: 'default',
