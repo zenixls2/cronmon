@@ -1,0 +1,56 @@
+doctype
+html
+    head
+        title crontab job monitoring
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/css/theme.default.css')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+        script(src='/js/jquery.tablesorter.js')
+        script(src='/js/jquery.tablesorter.widgets.js')
+    body
+        h1(style='text-align: center;') Crontab Job Monitoring
+        div(class='row')
+            div(class='col-xs-2')
+            div(class='col-xs-8')
+                table(id="list", class="tablesorter table")
+                    thead
+                        tr
+                            td Job name
+                            td Status
+                            td Last Update
+                            td Duration
+        script
+            |String.prototype.toHHMMSS = function() {
+            |   var sec_num = Math.floor(this/1000);
+            |   var hours = Math.floor(sec_num/3600);
+            |   var minutes = Math.floor((sec_num-hours*3600)/60);
+            |   var seconds = sec_num - hours*3600 - 60*minutes;
+            |   if (hours < 10) {hours = '0'+hours;}
+            |   if (minutes < 10) {minutes = '0'+minutes;}
+            |   if (seconds < 10) {seconds = '0'+seconds;}
+            |   return hours + ':' + minutes + ':' + seconds;
+            |};
+            |var job = function() {
+            |   $.getJSON('/stat', function(data) {
+            |       $('#list>tbody').remove();
+            |       var tbody = $('#list')[0].createTBody();
+            |       $.each(data, function(key, value) {
+            |           var row = tbody.insertRow(-1);
+            |           row.innerHTML = '<td>'+key+'</td><td>'+
+            |               value['status'] + '</td><td>' +
+            |               value['date'] + '</td><td>' +
+            |               value['duration'].toHHMMSS() + '</td>';
+            |       });
+            |       $('#list').tablesorter({
+            |           theme: 'default',
+            |           showProcessing: true,
+            |           widgets: ['filter', 'resizable']
+            |       });
+            |       $('#list').trigger('update');
+            |   });
+            |};
+            |setInterval(job, 10000);
+            |job();
+            

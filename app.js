@@ -2,6 +2,9 @@ var express = require('express'), app = express();
 var bodyParser = require('body-parser');
 var redis = require('redis'), client = redis.createClient();
 var sendmail = require('sendmail')();
+app.set('views', __dirname+'/views')
+app.set('view engine', 'jade')
+app.use(express.static(__dirname + '/public'))
 client.on("error", function(err) {
     console.log("Errro " + err);
 });
@@ -59,6 +62,9 @@ app.get('/stat', function(req, res) {
         });
     });
 });
+app.get('/', function(req, res) {
+    res.render('index', {});
+})
 var server = app.listen(3000, function() {
     var host = server.address().address;
     var port = server.address().port;
