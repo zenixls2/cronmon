@@ -24,5 +24,5 @@ Installation
 ```
 - to use in crontab:
 ```
-    0 1 * * * curl http://{domain}/run | ./job | curl http://{domain}/check?code=$?
+    0 1 * * * curl http://{domain}/run && (./job && curl http://{domain}/check?code=$?) || curl http://{domain}/check?code=$?
 ```
