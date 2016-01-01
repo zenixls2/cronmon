@@ -54,6 +54,10 @@ app.get('/stat', function(req, res) {
         keys.forEach(function(k) {
             client.hmget(k, 'date', 'duration', 'status', function(err, code) {
                 counter++;
+                if (err) {
+                    console.log(err);
+                    return;
+                }
                 result[k] = {date: code[0], duration: code[1], status: code[2]};
                 if (counter == keys.length) {
                     res.send(result);
