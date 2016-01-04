@@ -24,7 +24,7 @@ app.get(/.*\/check/, function(req, res) {
         client.multi().hmset(id, {
             date: date,
             duration: date.getTime()-(new Date(code[0])).getTime(),
-            status: req.query.code}).expire(id, 86400).exec();
+            status: req.query.code}).exec();
     });
     if (req.query.code != 0) {
         sendmail({
