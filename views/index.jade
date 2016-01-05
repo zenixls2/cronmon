@@ -32,14 +32,25 @@ html
             |   if (seconds < 10) {seconds = '0'+seconds;}
             |   return hours + ':' + minutes + ':' + seconds;
             |};
+            |fontColorModifier = function(v) {
+            |   switch(v) {
+            |   case '0':
+            |       return '<p style="color:green">Success</p>';
+            |   case 'run':
+            |       return '<p style="color:blue">'+v+'</p>';
+            |   default:
+            |       return '<p style="color:red">Error code: '+v+'</p>';
+            |   }
+            |}
             |var job = function() {
             |   $.getJSON('/stat', function(data) {
             |       $('#list>tbody').remove();
             |       var tbody = $('#list')[0].createTBody();
             |       $.each(data, function(key, value) {
             |           var row = tbody.insertRow(-1);
+            |           var statusModified = fontColorModifier(value['status']);
             |           row.innerHTML = '<td>'+key+'</td><td>'+
-            |               value['status'] + '</td><td>' +
+            |               statusModified + '</td><td>' +
             |               value['date'] + '</td><td>' +
             |               ((value['duration']==null)?null:value['duration'].toHHMMSS()) + '</td>';
             |       });
