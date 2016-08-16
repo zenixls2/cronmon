@@ -1,7 +1,7 @@
 Information
 ------------
 This is a web service for users to montor their cronjob execution results.
-If the cronjob abort without success, then their will be an alert mail sent to users.
+If the cronjob aborts without success, then their will be an alert mail sent to users.
 This tool also provide a webview for users to see how long the cronjob runs.
 
 
